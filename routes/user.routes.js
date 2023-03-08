@@ -74,4 +74,15 @@ userRouter.post("/login", async (req, res) => {
   }
 });
 
+userRouter.post("/logout", isAuth, attachCurrentUser, async (req, res) => {
+  try {
+    const currentUser = req.currentUser;
+    await UserModel.findByIdAndUpdate(currentUser._id, { token: null });
+    return res.status(200).json({ msg: "Desconectado com sucesso." });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
+
 export { userRouter };

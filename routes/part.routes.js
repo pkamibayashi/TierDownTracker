@@ -65,8 +65,8 @@ partRouter.get("/:partId", isAuth, attachCurrentUser, async (req, res) => {
 partRouter.put(
   "/edit/:partId",
   isAuth,
-  isAdmin,
   attachCurrentUser,
+  isAdmin,
   async (req, res) => {
     try {
       const { partId } = req.params;
